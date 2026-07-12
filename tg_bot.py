@@ -29,73 +29,68 @@ def health_check():
 # Create Telegram bot application
 app = Application.builder().token(BOT_TOKEN).build()
 
-# --- FUN AND ENGAGING HANDLER FUNCTIONS ---
+# --- PROFESSIONAL HANDLER FUNCTIONS ---
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     welcome_text = (
-        "👋 **Yooo! Welcome to your personal routine & helper bot!** ✨\n\n"
-        "Let's get this productivity going! Focus sa goals today at bawal tamarin. "
-        "Here are the commands you can play with to check your links or get help:\n\n"
-        "📌 `/help` - Show all commands\n"
-        "📌 `/youtube` - Watch some tutorials or clips\n"
-        "📌 `/linkedin` - Check professional profile\n"
-        "📌 `/gmail` - Quick email link\n"
-        "📌 `/geeks` - GeeksforGeeks resources"
+        "💼 **Welcome to your Professional Routine & Assistant Bot.**\n\n"
+        "This bot is configured to assist with your daily workflows, tasks, and reference links. "
+        "Please use the following commands to navigate the platform:\n\n"
+        "📌 `/help` - View the directory of all available commands\n"
+        "📌 `/github` - Access version control repositories and source code\n"
+        "📌 `/linkedin` - Open the professional profile\n"
+        "📌 `/reddit` - Access the configured platform profile"
     )
     await update.message.reply_text(welcome_text, parse_mode='Markdown')
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     help_text = (
-        "💡 **Need a hand? I got you!**\n\n"
-        "You can control me using these standard commands:\n"
-        "• `/start` - Restart the conversation and greetings\n"
-        "• `/youtube` - Go straight to YouTube\n"
-        "• `/linkedin` - View LinkedIn profile\n"
-        "• `/gmail` - Shoot an email over\n"
-        "• `/geeks` - Read up on GeeksforGeeks articles"
+        "💡 **Command Directory & Help Center**\n\n"
+        "You can manage your workflows using these verified parameters:\n"
+        "• `/start` - Reinitialize the system and view welcoming options\n"
+        "• `/help` - Display this command instruction panel\n"
+        "• `/github` - Redirect to the target GitHub development account\n"
+        "• `/linkedin` - View the configured LinkedIn networking profile\n"
+        "• `/reddit` - Direct link to open the target Reddit network page"
     )
     await update.message.reply_text(help_text, parse_mode='Markdown')
 
-async def gmail_url(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("📧 **Gmail Ready:** Click here to check your inbox or drop a mail: [Google Mail](https://mail.google.com/)", parse_mode='Markdown')
+async def reddit_url(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text("🗣️ **Platform Redirect:** Click the following link to view the configured profile: [Reddit](https://www.reddit.com/user/angeline30/)", parse_mode='Markdown')
 
-async def youtube_url(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("📺 **Time for some videos!** Open [YouTube](https://www.youtube.com/) and lock in.", parse_mode='Markdown')
+async def github_url(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text("💻 **Source Code Repository:** Click the following link to view deployment projects: [GitHub](https://github.com/joeserrato)", parse_mode='Markdown')
 
 async def linkedIn_url(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("💼 **Networking mode on!** Check out the professional profile here: [LinkedIn](https://www.linkedin.com/)", parse_mode='Markdown')
-
-async def geeks_url(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("🤓 **Coding time!** Here is your link to read up and practice logic: [GeeksforGeeks](https://www.geeksforgeeks.org/)", parse_mode='Markdown')
+    await update.message.reply_text("💼 **Professional Profile:** Click the following link to view the networking registry: [LinkedIn](https://www.linkedin.com/in/joeangelineserrato/)", parse_mode='Markdown')
 
 async def unknown_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
-        "🤔 **Oops, wait lang!** Hindi ko pa masyadong gets yung regular text na pinasa mo: *'%s'*\n\n"
-        "Try using actual slash commands like `/help` or `/start` para smooth!" % update.message.text,
+        "ℹ️ **System Notification:** Standard text parsing is not configured for: *'%s'*\n\n"
+        "Please input a verified system slash command (e.g., `/help` or `/start`) to continue." % update.message.text,
         parse_mode='Markdown'
     )
 
 async def unknown(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
-        "❌ **Hala, invalid command!** \n"
-        "Walang command na *'%s'* sa system list natin. Subukan mong tingnan ang `/help` para sa tamang syntax." % update.message.text,
+        "❌ **Invalid Command Execution:** \n"
+        "The command *'%s'* is unrecognized by the core application. Please review the `/help` documentation for proper command structures." % update.message.text,
         parse_mode='Markdown'
     )
 
 # Add handlers
 app.add_handler(CommandHandler("start", start))
-app.add_handler(CommandHandler("youtube", youtube_url))
+app.add_handler(CommandHandler("github", github_url))
 app.add_handler(CommandHandler("help", help_command))
 app.add_handler(CommandHandler("linkedin", linkedIn_url))
-app.add_handler(CommandHandler("gmail", gmail_url))
-app.add_handler(CommandHandler("geeks", geeks_url))
+app.add_handler(CommandHandler("reddit", reddit_url))
 
 app.add_handler(MessageHandler(filters.COMMAND, unknown))
 app.add_handler(MessageHandler(filters.TEXT, unknown_text))
 
 # Function to run the bot
 def run_bot():
-    print("Bot is starting...")
+    print("Bot application starting...")
     app.run_polling()
 
 # Run both the bot and Flask server
@@ -105,7 +100,7 @@ if __name__ == "__main__":
     flask_thread.daemon = True
     flask_thread.start()
     
-    print("Flask server started on port 10000")
+    print("Flask server running securely on port 10000")
     
     # Run the bot in the main thread
     run_bot()
