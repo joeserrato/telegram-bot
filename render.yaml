@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: telegram-bot
+    env: python
+    buildCommand: |
+      python3 -m venv venv
+      . venv/bin/activate
+      pip install -r requirements.txt
+    startCommand: |
+      . venv/bin/activate
+      python tg_bot.py
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
